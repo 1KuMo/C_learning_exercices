@@ -128,7 +128,7 @@ void retirer_espaces(char *s){
 }
 
 
-int min_p(int tab[], int n){
+int* min_p(int tab[], int n){
     int *min = tab;
     for(int i=0; i<n; i++){
         if(*min > tab[i]){
@@ -264,98 +264,93 @@ return firstInt - secondInt; : donne le sens de comparaison pour le tri croissan
 */
 void trier_qsort(int tab[], int n){
     qsort( tab, n, sizeof(int), intComparator );
-    afficher_tab(tab, n);
+    afficherTab(tab, n);
     qsort( tab, n, sizeof(int), intComparatorDesc );
-    afficher_tab(tab, n);
+    afficherTab(tab, n);
 }
 
 
 // EXERCICE 16 / thank god des gens font des cours
-// jsens la patate arriver avec les vecteurs 
-// https://hichamjanati.github.io/media/C/structures.pdf
-typedef struct Etudiant Etudiant;
-struct Etudiant{
+/*
+https://www.youtube.com/watch?v=JsUSp4cf_2w
+jsens la patate arriver avec les ABR (can't wait de parcourir 800 arbres j'adore ça autant qu'la récursivité )
+https://hichamjanati.github.io/media/C/structures.pdf
+à la base la feuille d'exercice porte sur les pointeurs pourquoi j'apprends ça maintenant..
+*/
+typedef struct{
     char nom[32];
     int note;
 } Etudiant;
-
 
 void init(Etudiant *e, char *nom, int note){
     if (e==NULL){
         return; 
     }
     
-    e -> note = note;
-    e -> nom = nom;
+    // quand on utilise une structure depuis des pointeurs on mets des ptites fleches au lieu des points
+    // spot the difference
+    strcpy(e->nom, nom);
+    e->note = note;
 }
 
-
 int main(){
-    // 1
-    // test();
-
-    /* // 2 
-    int a = 1, b=2;
-    printf("a : %d\nb : %d\n", a, b);
-    swap (&a, &b);
-    printf("a : %d\nb : %d\n", a, b);
-    */
- 
-    /* // 3
-    int tab[] = {25, 50, 75, 100};
-    int min, max ;
-    minetmax(tab, 4, &min, &max);
-    printf("min : %d\nmax : %d\n", min, max);
-    */
+        
+    /* 17 */
     
-    /* // 4 
-    int tab[] = {25, 50, 75, 100};
-    printf("somme : %d\nmoyenne : %d\n", somme(tab, 4), moyenne(tab, 4));
+
+
+    /* 16
+    Etudiant e1;
+
+    init(&e1, "toad", 20);
+    printf("nom: %s, note: %d\n", e1.nom, e1.note);
+    return 0;
     */
 
-    /* // 5
-    int tab[] = {25, 50, 75, 100};
-    inverser(tab, 4);
-    printf("tableau inversé !\n");
-    afficherTab(tab, 4);    
+    /* 15
+    int tab[] = {8, 3, 12, 1, 6};
+    trier_qsort(tab, sizeof(tab)/sizeof(tab[0]));
+    return 0;
     */
 
-    /* // 6
-    char *chaine = "Hello World!";
-    printf("il y a %d caract dans la chaine\n", len(chaine));
+    /* 14
+    int tab[] = {1,2,3,4,5};
+    int n = sizeof(tab) / sizeof(tab[0]);
+    appliquer(tab,n,doubler);
+    afficher_tab(tab, n);
+    return 0;
     */
 
-    /* // 7 
-    char *base = "blabla";
-    char copie[100]; // Segmentation fault (core dumped) :(
-    copier(copie, base);
-    printf("copie de la chaine : %s\n", copie);
-    */
+    /* 13
+    int n = 0 ;
+    int *tab = malloc(n * sizeof(int));
 
-    /* // 8
-    char *s = "hello";
-    printf("il y a %d voyelles dans la chaine\n", nb_voyelles(s));
-    */
+    push_back(&tab, &n, 10);
+    push_back(&tab, &n, 20);
+    push_back(&tab, &n, 30);
+    push_back(&tab, &n, 5);
 
-    /* // 9 
-    char chaine[] = "Hello world o/ ! ";
-    // je viens de découvrir la fameuse difference entre *chaine et chaine[]  (je hais les docs)
-    // *chaine -> pointeur vers une chaine en mode lecture seule
-    // chaine[] -> tab de caractere ( la base ) donc modifiable 
-    printf("chaine de base : %s\n", chaine);
-    retirer_espaces(chaine);
-    printf("chaine sans espaces : %s\n", chaine);
-    */
-    
-    /* // 10 
-    int tab[] = {25, 50, 75, 100};
-    int *p_min = min_p(tab, 4);
+    printf("%d\n", n);
+    // afficher_tab(tab, sizeof(tab)/sizeof(tab[0]));
 
-    if (p_min != NULL){
-        int indice = p_min - tab;
-        printf("minimum : %d\n", *p_min);
-        printf("indice : %d\n", indice);
+    printf("%d\n", n);
+    for (int i = 0; i<n; i++){
+        printf("C%d ", tab[i]);
     }
+    printf("\n");
+    free(tab);
+    return 0;
+    */
+
+    /* 12
+    int matrice[] = {4, 8, 7, 1, 9, 3, 0, 2, 5};
+    // printf("taille tab; %d\n", sizeof(matrice) / sizeof(matrice[0]));
+    int taille = sizeof(matrice) / sizeof(matrice[0]);
+    afficher_tab(matrice, taille);
+    set(matrice, 3, 2, 2, 18);
+    // printf("%d\n", *rep);
+    afficher_tab(matrice, taille);
+    return 0;
     */
 
     /* 11
@@ -376,59 +371,75 @@ int main(){
     printf("moyenne de tab : %f\n", calculer_moyenne(tab, size));
 
     free(tab);
-    return 0; 
-    */
-
-    /* 12 
-    int matrice[] = {4, 8, 7, 1, 9, 3, 0, 2, 5};
-    // printf("taille tab; %d\n", sizeof(matrice) / sizeof(matrice[0]));
-    int taille = sizeof(matrice) / sizeof(matrice[0]);
-    afficher_tab(matrice, taille);
-    set(matrice, 3, 2, 2, 18);
-    // printf("%d\n", *rep);
-    afficher_tab(matrice, taille);
     return 0;
     */
 
-    /* 13 
-    int n = 0 ;
-    int *tab = malloc(n * sizeof(int));
+    /* 10
+    int tab[] = {25, 50, 75, 100};
+    int *p_min = min_p(tab, 4);
 
-    push_back(&tab, &n, 10);
-    push_back(&tab, &n, 20);
-    push_back(&tab, &n, 30);
-    push_back(&tab, &n, 5);
-
-    printf("%d\n", n);
-    
-    // afficher_tab(tab, sizeof(tab)/sizeof(tab[0]));
-
-    printf("%d\n", n);
-    for (int i = 0; i<n; i++){
-        printf("C%d ", tab[i]);
+    if (p_min != NULL){
+        int indice = p_min - tab;
+        printf("minimum : %d\n", *p_min);
+        printf("indice : %d\n", indice);
     }
-    printf("\n");
-    
-    free(tab);
-    return 0;
     */
 
-    /* 14 
-    int tab[] = {1,2,3,4,5};
-    int n = sizeof(tab) / sizeof(tab[0]);
-    appliquer(tab,n,doubler);
-    afficher_tab(tab, n);
-    return 0;
+    /* 9
+    char chaine[] = "Hello world o/ ! ";
+    // je viens de découvrir la fameuse difference entre *chaine et chaine[]  (je hais les docs)
+    // *chaine -> pointeur vers une chaine en mode lecture seule
+    // chaine[] -> tab de caractere ( la base ) donc modifiable 
+    printf("chaine de base : %s\n", chaine);
+    retirer_espaces(chaine);
+    printf("chaine sans espaces : %s\n", chaine);
     */
 
-    /* 15 
-    int tab[] = {8, 3, 12, 1, 6};
-    trier_qsort(tab, sizeof(tab)/sizeof(tab[0]));
-    return 0;
-    */ 
+    /* 8
+    char *s = "hello";
+    printf("il y a %d voyelles dans la chaine\n", nb_voyelles(s));
+    */
 
-    Etudiant e1;
+    /* 7
+    char *base = "blabla";
+    char copie[100]; // Segmentation fault (core dumped) :(
+    copier(copie, base);
+    printf("copie de la chaine : %s\n", copie);
+    */
 
-    init(&e1, "toad", 20);
-    return 0;
+    /* 6
+    char *chaine = "Hello World!";
+    printf("il y a %d caract dans la chaine\n", len(chaine));
+    */
+
+    /* 5
+    int tab[] = {25, 50, 75, 100};
+    inverser(tab, 4);
+    printf("tableau inversé !\n");
+    afficherTab(tab, 4);    
+    */
+
+    /* 4 
+    int tab[] = {25, 50, 75, 100};
+    printf("somme : %d\nmoyenne : %d\n", somme(tab, 4), moyenne(tab, 4));
+    */
+
+    /* 3
+    int tab[] = {25, 50, 75, 100};
+    int min, max ;
+    minetmax(tab, 4, &min, &max);
+    printf("min : %d\nmax : %d\n", min, max);
+    */
+
+    /* // 2 
+    int a = 1, b=2;
+    printf("a : %d\nb : %d\n", a, b);
+    swap (&a, &b);
+    printf("a : %d\nb : %d\n", a, b);
+    */
+
+    /* // 1
+    test();
+    */
+
 }
