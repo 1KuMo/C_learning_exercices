@@ -138,6 +138,7 @@ int* min_p(int tab[], int n){
     return min;
 }
 
+// voir bonus.c 
 
 /*
 EXERCICE 11
@@ -273,7 +274,7 @@ void trier_qsort(int tab[], int n){
 // EXERCICE 16 / thank god des gens font des cours
 /*
 https://www.youtube.com/watch?v=JsUSp4cf_2w
-jsens la patate arriver avec les ABR (can't wait de parcourir 800 arbres j'adore ça autant qu'la récursivité )
+jsens la patate arriver entre les files les piles les ABR (can't wait de parcourir 800 arbres j'adore ça autant qu'la récursivité )
 https://hichamjanati.github.io/media/C/structures.pdf
 à la base la feuille d'exercice porte sur les pointeurs pourquoi j'apprends ça maintenant..
 */
@@ -293,11 +294,53 @@ void init(Etudiant *e, char *nom, int note){
     e->note = note;
 }
 
+
+// EXERCICE 17 ( jsais pas comment ca marche mais ca marche )
+/*
+wow
+https://www.youtube.elecom/watch?v=oZLpB2BagHQ
+https://www.youtube.com/watch?v=XME03psQ9mo
+incroyable le seul cours compréhensible 
+*/
+
+struct Elt{
+    int val;
+    struct Elt *suivant;
+};
+typedef struct Elt LISTE;
+
+void push_front(LISTE** tete, int val) {
+    LISTE* nouveau_noeud = malloc(sizeof(LISTE)); // ...
+    
+    nouveau_noeud->val = val;
+    nouveau_noeud->suivant = *tete;  
+    *tete = nouveau_noeud;
+}
+
+
 int main(){
         
     /* 17 */
-    
+    /*
+    LISTE *liste=0;
+    liste = maloc(sizeof(LISTE));
 
+    liste->val = 145;
+    liste->suivant = 0;
+    */
+    LISTE* tab = NULL;
+
+    push_front(&tab, 3);
+    push_front(&tab, 2);
+    push_front(&tab, 1);
+
+    LISTE* pt_tab = tab;
+    printf("contenu de la liste : ");
+    while (pt_tab != NULL) {
+        printf("%d -> ", pt_tab->val);
+        pt_tab = pt_tab->suivant; 
+    }
+    printf("trop null\n"); // j'ai 2 ans 
 
     /* 16
     Etudiant e1;
@@ -431,14 +474,14 @@ int main(){
     printf("min : %d\nmax : %d\n", min, max);
     */
 
-    /* // 2 
+    /* 2 
     int a = 1, b=2;
     printf("a : %d\nb : %d\n", a, b);
     swap (&a, &b);
     printf("a : %d\nb : %d\n", a, b);
     */
 
-    /* // 1
+    /* 1
     test();
     */
 
