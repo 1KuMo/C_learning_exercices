@@ -298,7 +298,7 @@ void init(Etudiant *e, char *nom, int note){
 // EXERCICE 17 ( jsais pas comment ca marche mais ca marche )
 /*
 wow
-https://www.youtube.elecom/watch?v=oZLpB2BagHQ
+https://www.youtube.com/watch?v=oZLpB2BagHQ&
 https://www.youtube.com/watch?v=XME03psQ9mo
 incroyable le seul cours compréhensible 
 */
