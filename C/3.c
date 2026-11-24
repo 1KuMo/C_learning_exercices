@@ -303,6 +303,9 @@ https://www.youtube.com/watch?v=XME03psQ9mo
 incroyable le seul cours compréhensible 
 */
 
+
+// debut->valeur est synonyme de (*debut).valeur
+
 struct Elt{
     int val;
     struct Elt *suivant;
@@ -310,29 +313,118 @@ struct Elt{
 typedef struct Elt LISTE;
 
 void push_front(LISTE** tete, int val) {
-    LISTE* nouveau_noeud = malloc(sizeof(LISTE)); // ...
+    LISTE* suiv = malloc(sizeof(LISTE)); // ...
     
-    nouveau_noeud->val = val;
-    nouveau_noeud->suivant = *tete;  
-    *tete = nouveau_noeud;
+    suiv->val = val;
+    suiv->suivant = *tete;  
+    *tete = suiv;
 }
 
 
-int main(){
-        
-    /* 17 */
-    /*
-    LISTE *liste=0;
-    liste = maloc(sizeof(LISTE));
+void push_end(LISTE** tete, int val){
+    // on le place après 'en_place' 
+    LISTE* pCourant; 
 
-    liste->val = 145;
-    liste->suivant = 0;
+    pCourant = *tete;
+    while(pCourant->suivant != NULL){
+        pCourant = pCourant->suivant;
+    }
+
+    LISTE* courant = malloc(sizeof(LISTE));
+    pCourant->suivant = courant;
+    courant->val = val;
+
+}
+
+
+void push_toelt(LISTE** tete, int elt, int val){
+    LISTE* pCourant; 
+
+    pCourant = *tete;
+    while(pCourant->val != elt){
+        pCourant = pCourant->suivant;
+    }
+
+    if(pCourant!=0){
+        LISTE* courant = malloc(sizeof(LISTE));
+        courant->suivant = pCourant->suivant;
+        pCourant->suivant = courant;
+        courant->val = val;
+    }
+    // don't ask the else 
+}
+
+// EXERCICE 18 
+/* merci à l'ia de m'explquer ces consignes incompréhensibles 
+4. Ce que ta fonction doit faire
+    En gros, elle doit :
+    1. Repérer le début du premier token.
+    2. Stocker son adresse dans out[0].
+    3. Parcourir s.
+    4. Chaque fois qu'elle rencontre une virgule :
+    - remplacer la virgule par '\0' ;
+    - enregistrer l'adresse du caractère suivant dans out[] (si c'est le début d'un token).
+    5. Retourner le nombre de tokens trouvés.
+*/
+
+int sam_altman(char s[]){
+    // on va prendre un texte sans espaces après le début du premier token
+    char* curs = s;
+    while (*curs == ' '){
+        curs++;
+    }
+
+    char* out[10]; // faut pas mettre un roman non plus svp
+    int i = 0;
+    bool dernierVirgule = true;
+
+    while (*curs != '\0'){
+        if(*curs == ','){
+            *curs = '\0';
+            dernierVirgule = true ;
+        }
+
+        else if (dernierVirgule){
+            dernierVirgule = false;
+            out[i] = curs;
+            i++;
+        }
+        curs++;
+    }
+    return i;
+}
+
+
+// EXERCICE 19
+
+
+int main(){
+    /* 19 */
+
+
+
+    /* 18 
+    char prompt[] = "     Hello,wwoorld,wrouf,123";
+    printf("%d\n", sam_altman(prompt));
+    return 0;
     */
+
+
+    /* 17 
+    
+    // LISTE *liste=0;
+    // liste = maloc(sizeof(LISTE));
+
+    // liste->val = 145;
+    // liste->suivant = 0;
+    
     LISTE* tab = NULL;
 
     push_front(&tab, 3);
     push_front(&tab, 2);
     push_front(&tab, 1);
+    push_end(&tab, 40);
+    push_toelt(&tab, 2, 6);
 
     LISTE* pt_tab = tab;
     printf("contenu de la liste : ");
@@ -341,6 +433,9 @@ int main(){
         pt_tab = pt_tab->suivant; 
     }
     printf("trop null\n"); // j'ai 2 ans 
+
+    */
+    
 
     /* 16
     Etudiant e1;
