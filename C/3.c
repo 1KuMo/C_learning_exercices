@@ -396,12 +396,51 @@ int sam_altman(char s[]){
 
 
 // EXERCICE 19
+int dot(const int *A, const int *B, int n){
+    const int *fin = A + n ;
+    int somme = 0;
+    while(A != fin){
+        somme += *A * *B;
+        A++;
+        B++;
+    }
+    return somme ; 
+}
+
+
+// EXERCICE 20 - gcc 3.c -lm
+/*
+double fonction(double x){
+    // double ret = pow(x,2);
+    // return ret; 
+    return x * 2;
+}
+*/
+
+// c'est si beau
+double integrale(double (*callback)(double), double a, double b, int n){
+    double h = (b-a) / n ;
+    double somme = (callback(a) + callback(b)) / 2.0 ;
+    for(int i = 1; i < n; i++ ){
+        somme += callback(a + i * h);
+    }
+    printf("%f\n", h*somme);
+    return h * somme ;
+}
 
 
 int main(){
-    /* 19 */
+    /* 20 ( enfin ? ) 
+    double n = 10;
+    double ret = integrale(fonction, 0.0, 3.0, n);
+    printf("%f\n", ret); 
+    */
 
-
+    /* 19 
+    int A[] = {2,3,4};
+    int B[] = {5,6,7};
+    printf("<A|B> = %d\n", dot(A, B, 3));
+    */
 
     /* 18 
     char prompt[] = "     Hello,wwoorld,wrouf,123";
