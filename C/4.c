@@ -259,7 +259,7 @@ bool contient(Cercle k, Point p){
 }
 
 
-// EXERCICE 14 not finished yet 
+// EXERCICE 14 
 typedef struct{
     double a11;
     double a12;
@@ -276,12 +276,17 @@ Point mul(Mat2 m, Point p){
 }
 
 
+// EXERCICE 15 
+
 int main(){
-    /* 14 */
+    /* 15 */
+
+    /* 14 
     Mat2 m = {1, 0, 0, 1};
     Point p = {3.0, 4.0};
-    Point p2 = mul(m, p);
-    printf("x : %d | y : %d\n",p2.x, p2.y); 
+    Point ret = mul(m, p);
+    printf("x : %f | y : %f\n", ret.x, ret.y); 
+    */
 
     /* 13 
     Cercle k = {{2.0, 3.0}, 5.0};
