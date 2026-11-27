@@ -278,9 +278,34 @@ Point mul(Mat2 m, Point p){
 
 // EXERCICE 15 
 
+typedef struct{
+    char titre[64];
+    char auteur [48];
+    int an;
+} Livre;
+
+
+Livre findByAuthor(Livre* tab, char auteur){
+    bool found = false;
+    Livre* cur = tab;
+    while(!found && cur!=NULL){
+        if(cur->auteur == auteur){
+            found = true ;
+            return *cur;
+        }
+        cur++;
+    }
+    return NULL;
+}
+
+
 int main(){
     /* 15 */
+    Livre l = {"bleu", "toad", 1900};
+    Livre l2 = {"rouge", "mario", 1900};
+    Livre l3 = {"vert", "luigi", 1900};
 
+    Livre tab[] = {l, l2, l3};
     /* 14 
     Mat2 m = {1, 0, 0, 1};
     Point p = {3.0, 4.0};
